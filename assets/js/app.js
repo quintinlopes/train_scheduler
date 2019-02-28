@@ -1,10 +1,10 @@
 var config = {
-    apiKey: "AIzaSyCdCnaio1S5mWGdR9BlEjl8OGi1PO1TTSM",
-    authDomain: "train-scheduler-4bc3e.firebaseapp.com",
-    databaseURL: "https://train-scheduler-4bc3e.firebaseio.com",
-    projectId: "train-scheduler-4bc3e",
-    storageBucket: "train-scheduler-4bc3e.appspot.com",
-    messagingSenderId: "336775941029"
+        apiKey: "AIzaSyCdCnaio1S5mWGdR9BlEjl8OGi1PO1TTSM",
+        authDomain: "train-scheduler-4bc3e.firebaseapp.com",
+        databaseURL: "https://train-scheduler-4bc3e.firebaseio.com",
+        projectId: "train-scheduler-4bc3e",
+        storageBucket: "train-scheduler-4bc3e.appspot.com",
+        messagingSenderId: "336775941029"
     };
     firebase.initializeApp(config);
 
@@ -18,14 +18,12 @@ $("#submitTrain").on("click", function(event) {
     var trainTime = $("#trainTime").val().trim();
     var frequency = $("#frequency").val().trim();
 
-    var newTrain = {
+    database.ref().push({
         name: trainName,
         destination: destination,
         time: trainTime,
         frequency: frequency
-    };
-
-    database.ref().push(newTrain);
+    });
 
     $("#trainName").val("");
     $("#destination").val("");
@@ -77,5 +75,5 @@ database.ref().on("child_added", function(snapshot) {
         // $("<td>").text(frequency),
         // $("<td>").text(minutesAway),
     
-    $("#addTrain").append(row);
+    $("#addTrain").append(newRow);
 });
